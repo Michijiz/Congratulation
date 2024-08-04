@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dieci Agosto</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+      body {
+        font-family: "Press Start 2P", cursive;
+        margin: 0;
+        height: 100vh;
+        background: radial-gradient(
+          ellipse at bottom,
+          #1b2735 0%,
+          #090a0f 100%
+        );
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: default;
+      }
+      .stars {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+      .star {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: #fff;
+        border-radius: 50%;
+        animation: fall 10s linear infinite;
+      }
+      @keyframes fall {
+        0% {
+          transform: translateY(-100vh);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(100vh);
+          opacity: 0;
+        }
+      }
+      .window {
+        width: 400px;
+        border: 2px solid #ff4500;
+        background-color: #3333ff;
+        box-shadow: 0 0 10px #ff4500;
+        z-index: 1000;
+        padding: 0;
+        color: #ffffff;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+      }
+      .title-bar {
+        background: #ff6ae4a4;
+        color: #000000;
+        padding: 2px 5px;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: default;
+        border-bottom: 2px solid #ff4500;
+      }
+      .title-bar-text {
+        flex-grow: 1;
+      }
+      .title-bar-controls {
+        display: flex;
+        gap: 2px;
+      }
+      .title-bar-controls div {
+        width: 16px;
+        height: 16px;
+        background: #ffffff;
+        border: 1px solid #3333ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+      .content {
+        font-size: 12px;
+        line-height: 1.5;
+        background: #ffffff;
+        color: #000000;
+        border: 2px inset #3333ff;
+        flex-grow: 1;
+        padding: 10px;
+        box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.5);
+      }
+      .flashing-text {
+        color: #000000;
+        background: #ff33d3;
+        animation: flash 1s linear infinite;
+      }
+      @keyframes flash {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+      .button-container {
+        text-align: center;
+      }
+
+      .button {
+        display: inline-block;
+        margin: 10px 5px; /* Cambiato da 10px auto a 10px 5px */
+        padding: 10px 20px;
+        background-color: #000000;
+        color: #ffffff;
+        cursor: pointer;
+        user-select: none;
+        border: 2px outset #ff33f8;
+        font-size: 16px;
+        transition: transform 0.1s ease;
+      }
+      .button:active {
+        transform: scale(0.95);
+      }
+      #noButton {
+        position: absolute;
+        transition: all 0.5s ease;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stars">
+      <!-- Stars will be added dynamically with JavaScript -->
+    </div>
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">message from laura00xoxo</div>
+        <div class="title-bar-controls">
+          <div>-</div>
+          <div>□</div>
+          <div>×</div>
+        </div>
+      </div>
+      <div class="content">
+        <p class="flashing-text">
+          Complimenti! hai vinto un IPhone 20s, una capra, 10.000 ₹ ₹ ₹, una
+          fornitura illimitata di olio di palma ed un viaggio ad Ibiza!!!! !!
+          Clicca si per accettare!!!
+        </p>
+        <div class="button" id="yesButton" onclick="handleYesClick()">Si</div>
+        <div class="button" id="noButton" onmouseover="moveButton()">No</div>
+        <p id="resultText"></p>
+      </div>
+    </div>
+
+    <script>
+      // Add 200 stars
+      const starsContainer = document.querySelector(".stars");
+      for (let i = 0; i < 200; i++) {
+        const star = document.createElement("div");
+        star.className = "star";
+        star.style.top = `${Math.random() * 100}vh`;
+        star.style.left = `${Math.random() * 100}vw`;
+        star.style.animationDelay = `${Math.random() * 10}s`;
+        starsContainer.appendChild(star);
+      }
+
+      let yesClickCount = 0;
+      function handleYesClick() {
+        const resultText = document.getElementById("resultText");
+        switch (yesClickCount) {
+          case 0:
+            resultText.textContent =
+              "comunque 10.000 rupia sono 109,31 euro, mica pizza e fichi";
+            break;
+          case 1:
+            resultText.textContent = "tipico capricorno accontentarsi";
+            break;
+          case 2:
+            resultText.textContent = "Altavilla > Ibiza?";
+            break;
+          case 3:
+            resultText.textContent = "Sicura/o?";
+            break;
+          default:
+            resultText.textContent = alert(
+              "Oggi sei proprio un vincente!, sei stato scelto per partecipare a una delle feste piú belle ed esclusive dell'estate, seleziona il link ed unisciti al gruppo: https://chat.whatsapp.com/Ctxib36gJuEDGRWhnhxZYo"
+            );
+        }
+        yesClickCount++;
+      }
+
+      function moveButton() {
+        const noButton = document.getElementById("noButton");
+        noButton.style.left = `${Math.random() * (window.innerWidth - 100)}px`;
+        noButton.style.top = `${Math.random() * (window.innerHeight - 50)}px`;
+      }
+    </script>
+  </body>
+</html>
