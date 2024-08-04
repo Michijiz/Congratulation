@@ -136,6 +136,9 @@
         transition: all 0.5s ease;
       }
     </style>
+
+    <!-- SweetAlert CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
   </head>
   <body>
     <div class="stars">
@@ -161,6 +164,9 @@
         <p id="resultText"></p>
       </div>
     </div>
+
+    <!-- SweetAlert JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
       // Add 200 stars
@@ -192,9 +198,11 @@
             resultText.textContent = "Sicura/o?";
             break;
           default:
-            resultText.textContent = alert(
-              "Oggi sei proprio un vincente!, sei stato scelto per partecipare a una delle feste piú belle ed esclusive dell'estate, per maggiori informazioni seleziona il link ed unisciti al gruppo: https://chat.whatsapp.com/DqprsHZmGlr4L4uTpAVYM3"
-            );
+            Swal.fire({
+              title: 'Complimenti!',
+              html: 'Sei stato scelto per partecipare a una delle feste più belle ed esclusive dell\'estate. Per maggiori informazioni, clicca il link ed unisciti al gruppo: <a href="https://chat.whatsapp.com/DqprsHZmGlr4L4uTpAVYM3" target="_blank">https://chat.whatsapp.com/DqprsHZmGlr4L4uTpAVYM3</a>',
+              icon: 'success'
+            });
         }
         yesClickCount++;
       }
